@@ -1,476 +1,497 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://pl29660079.effectivecpmnetwork.com/14/5a/b2/145ab227ef42be577fae824335cabf34.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GAME 3D ONLINE</title>
+    <title>ADULT GAME 3D SEX EMULATOR - Character Select</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --neon-pink: #e83e8c;
+            --neon-pink-dark: #d6337a;
+            --gold: #f5c842;
+            --gold-glow: rgba(245, 200, 66, 0.3);
+            --dark-bg: #0a0a0a;
+            --panel-bg: rgba(10, 10, 10, 0.85);
         }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; min-height: 100vh; font-family: 'Rajdhani', sans-serif; background: var(--dark-bg); color: #fff; overflow-x: hidden; }
 
-        html, body {
-            width: 100%;
-            height: 100%;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            background: #0a0a0a;
-            overflow: hidden;
-            position: relative;
-        }
+        /* ===== VIDEO BACKGROUND ===== */
+        .video-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; overflow: hidden; background: var(--dark-bg); }
+        #bg-video { position: absolute; top: 50%; left: 50%; width: 100%; height: 100%; object-fit: cover; transform: translate(-50%, -50%); z-index: 0; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.45); z-index: 1; }
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+        /* ===== PARTICLES ===== */
+        .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; overflow: hidden; }
+        .particle { position: absolute; border-radius: 50%; opacity: 0; animation: floatUp linear infinite; }
+        @keyframes floatUp { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.7; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
 
-        /* VIDEO BACKGROUND - FULL LAYAR */
-        .video-wrapper {
+        /* ===== LOADING SCREEN ===== */
+        .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1s ease, visibility 1s ease; }
+        .loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+        .loading-spinner { width: 80px; height: 80px; border: 4px solid rgba(232, 62, 140, 0.2); border-top-color: var(--neon-pink); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 30px; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .loading-text { font-family: 'Orbitron'; font-size: 16px; letter-spacing: 6px; color: var(--neon-pink); animation: loadingPulse 1.5s ease-in-out infinite; }
+        @keyframes loadingPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+
+        /* ===== FAKE GAME LOADING OVERLAY ===== */
+        .fake-loading-overlay {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            overflow: hidden;
-            background: #0a0a0a;
-        }
-
-        #bg-video {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transform: translate(-50%, -50%);
-            z-index: 0;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 1;
-        }
-
-        /* BRAND - pojok kiri atas */
-        .brand {
-            position: fixed;
-            top: 30px;
-            left: 30px;
-            z-index: 3;
-            font-size: 22px;
-            font-weight: 700;
-            letter-spacing: 5px;
-            color: #f5c842;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-        }
-
-        /* KONTEN TENGAH - CENTER */
-        .center-content {
-            position: relative;
-            z-index: 2;
-            display: flex;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: #000;
+            z-index: 10000;
+            display: none;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .fake-loading-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .fake-loading-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .fake-loading-container {
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .fake-loading-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+
+        .fake-loading-icon svg {
             width: 100%;
             height: 100%;
-            padding: 20px;
-            text-align: center;
+            animation: iconPulse 2s ease-in-out infinite;
         }
 
-        /* ===== HEADLINE BARU ===== */
-        .headline-main {
-            font-size: 48px;
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(232, 62, 140, 0.5)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 40px rgba(232, 62, 140, 0.8)); }
+        }
+
+        .fake-loading-title {
+            font-family: 'Orbitron';
+            font-size: 24px;
             font-weight: 900;
-            color: #ffffff;
-            text-shadow: 0 2px 30px rgba(0,0,0,0.95), 0 0 60px rgba(0,0,0,0.5);
-            line-height: 1.1;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
+            letter-spacing: 6px;
+            color: var(--neon-pink);
+            margin-bottom: 10px;
             text-transform: uppercase;
         }
 
-        .headline-main .highlight {
-            color: #f5c842;
-        }
-
-        .headline-sub {
-            font-size: 22px;
-            font-weight: 300;
-            color: #f0e8e0;
-            text-shadow: 0 2px 20px rgba(0,0,0,0.9);
+        .fake-loading-subtitle {
+            font-family: 'Rajdhani';
+            font-size: 14px;
             letter-spacing: 4px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 40px;
             text-transform: uppercase;
-            margin-bottom: 22px;
         }
 
-        /* ===== CHARACTER SELECTOR ===== */
-        .char-selector-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: #f5c842;
-            text-transform: uppercase;
+        .fake-loading-status {
+            font-family: 'Orbitron';
+            font-size: 12px;
             letter-spacing: 3px;
-            margin-bottom: 16px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            color: var(--gold);
+            margin-bottom: 20px;
+            min-height: 20px;
         }
 
-        .char-grid {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-bottom: 28px;
-        }
-
-        .char-card {
-            width: 160px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: transparent !important;
-            border: none !important;
-            box-shadow: none !important;
-            border-radius: 0;
-            overflow: visible;
-        }
-
-        .char-card:hover {
-            transform: translateY(-10px) scale(1.05);
-        }
-
-        .char-card .char-image {
+        .fake-progress-container {
             width: 100%;
-            aspect-ratio: 3/4;
+            height: 6px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .fake-progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--neon-pink), var(--gold), var(--neon-pink));
+            background-size: 200% 100%;
+            border-radius: 6px;
+            transition: width 0.3s ease;
             position: relative;
             overflow: hidden;
-            background: transparent !important;
-            border-radius: 20px;
-            border: 3px solid transparent;
-            transition: border 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .char-card .char-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-            border-radius: 20px;
+        .fake-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 1.5s infinite;
         }
 
-        .char-card:hover .char-image img {
-            transform: scale(1.06);
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
-        .char-card:hover .char-image {
-            border-color: #f5c842;
-        }
-
-        .char-card.selected .char-image {
-            border-color: #f5c842;
-            box-shadow: 0 0 40px rgba(245, 200, 66, 0.35);
-        }
-
-        .char-card .char-name {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            color: #ffffff;
-            margin-top: 8px;
-            letter-spacing: 1.5px;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.9);
-        }
-
-        /* ===== TOMBOL PINK ===== */
-        .btn-pink {
-            background: #e83e8c;
-            border: none;
-            border-radius: 50px;
-            padding: 18px 55px;
-            font-size: 22px;
-            font-weight: 700;
-            color: #ffffff;
-            cursor: pointer;
-            text-transform: uppercase;
+        .fake-progress-text {
+            font-family: 'Orbitron';
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
             letter-spacing: 2px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 30px rgba(232, 62, 140, 0.5);
-            text-decoration: none;
+        }
+
+        .fake-loading-tips {
+            margin-top: 40px;
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 16px;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .fake-loading-tips-title {
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--gold);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .fake-loading-tips-text {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.6;
+            min-height: 40px;
+        }
+
+        .fake-loading-dots {
             display: inline-block;
+            width: 20px;
+            text-align: left;
+        }
+
+        /* Spinner rings */
+        .spinner-rings {
             position: relative;
-            z-index: 5;
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
         }
 
-        .btn-pink:hover {
-            background: #d6337a;
-            transform: scale(1.05);
-            box-shadow: 0 6px 40px rgba(232, 62, 140, 0.6);
+        .spinner-ring {
+            position: absolute;
+            border-radius: 50%;
+            border: 3px solid transparent;
         }
 
-        .btn-pink:active {
-            transform: scale(0.95);
+        .spinner-ring:nth-child(1) {
+            width: 120px; height: 120px;
+            top: 0; left: 0;
+            border-top-color: var(--neon-pink);
+            animation: spinRing 2s linear infinite;
         }
 
-        .btn-pink a {
-            color: #ffffff;
-            text-decoration: none;
-            display: block;
+        .spinner-ring:nth-child(2) {
+            width: 90px; height: 90px;
+            top: 15px; left: 15px;
+            border-right-color: var(--gold);
+            animation: spinRing 1.5s linear infinite reverse;
         }
 
-        /* ===== RESPONSIF ===== */
-        @media (max-width: 768px) {
-            .char-card {
-                width: 130px;
-            }
-            .char-grid {
-                gap: 20px;
-            }
-            .headline-main {
-                font-size: 38px;
-            }
-            .headline-sub {
-                font-size: 18px;
-                letter-spacing: 3px;
-            }
+        .spinner-ring:nth-child(3) {
+            width: 60px; height: 60px;
+            top: 30px; left: 30px;
+            border-bottom-color: var(--neon-pink);
+            animation: spinRing 1s linear infinite;
         }
 
-        @media (max-width: 480px) {
-            .brand {
-                top: 20px;
-                left: 20px;
-                font-size: 16px;
-                letter-spacing: 3px;
-            }
-            
-            .headline-main {
-                font-size: 28px;
-                max-width: 90%;
-            }
-            
-            .headline-sub {
-                font-size: 14px;
-                letter-spacing: 2.5px;
-                margin-bottom: 16px;
-                max-width: 90%;
-            }
-
-            .char-selector-title {
-                font-size: 12px;
-                letter-spacing: 2px;
-                margin-bottom: 12px;
-            }
-
-            .char-card {
-                width: 105px;
-            }
-            
-            .char-card .char-name {
-                font-size: 12px;
-            }
-
-            .char-grid {
-                gap: 16px;
-                margin-bottom: 20px;
-            }
-            
-            .btn-pink {
-                padding: 14px 35px;
-                font-size: 17px;
-                letter-spacing: 1.5px;
-                width: 90%;
-                max-width: 280px;
-            }
+        @keyframes spinRing {
+            to { transform: rotate(360deg); }
         }
 
-        @media (max-width: 380px) {
-            .brand {
-                top: 15px;
-                left: 15px;
-                font-size: 14px;
-                letter-spacing: 2px;
-            }
-            
-            .headline-main {
-                font-size: 22px;
-            }
-            
-            .headline-sub {
-                font-size: 12px;
-                letter-spacing: 2px;
-                margin-bottom: 12px;
-            }
+        /* ===== HEADER ===== */
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, transparent 100%); backdrop-filter: blur(10px); }
+        .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Orbitron'; font-size: 20px; font-weight: 900; color: #fff; box-shadow: 0 0 25px rgba(232, 62, 140, 0.4); animation: logoPulse 3s ease-in-out infinite; }
+        @keyframes logoPulse { 0%, 100% { box-shadow: 0 0 25px rgba(232, 62, 140, 0.4); } 50% { box-shadow: 0 0 40px rgba(232, 62, 140, 0.7); } }
+        .logo-text { font-family: 'Orbitron'; font-size: 20px; font-weight: 900; letter-spacing: 4px; background: linear-gradient(135deg, var(--neon-pink), var(--gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .back-link { color: rgba(255,255,255,0.6); text-decoration: none; font-weight: 700; font-size: 13px; letter-spacing: 2.5px; text-transform: uppercase; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
+        .back-link:hover { color: var(--neon-pink); text-shadow: 0 0 15px rgba(232, 62, 140, 0.5); }
+        .back-link::before { content: '←'; font-size: 18px; }
 
-            .char-card {
-                width: 85px;
-            }
+        /* ===== MAIN CONTENT ===== */
+        .main { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 20px 60px; }
 
-            .char-card .char-image {
-                border-radius: 14px;
-            }
+        /* ===== LANDING PAGE ===== */
+        .landing-page { display: flex; flex-direction: column; align-items: center; }
+        .hero { text-align: center; margin-bottom: 50px; animation: fadeInDown 1s ease-out; }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        .hero-subtitle { font-size: 14px; letter-spacing: 10px; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; font-weight: 500; opacity: 0.9; }
+        .hero-title { font-family: 'Orbitron'; font-size: clamp(32px, 7vw, 64px); font-weight: 900; line-height: 1.1; margin: 0; background: linear-gradient(180deg, #fff 0%, var(--neon-pink) 60%, var(--neon-pink-dark) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 30px rgba(232, 62, 140, 0.2)); }
+        .hero-title span { display: block; font-size: 0.45em; letter-spacing: 14px; color: var(--gold); margin-top: 8px; -webkit-text-fill-color: var(--gold); opacity: 0.9; }
 
-            .char-card .char-name {
-                font-size: 10px;
-            }
+        .selector-title { font-size: 13px; letter-spacing: 8px; text-transform: uppercase; color: var(--gold); margin-bottom: 35px; text-align: center; position: relative; font-weight: 700; animation: fadeIn 1.2s ease-out 0.3s both; }
+        .selector-title::before, .selector-title::after { content: '◆'; margin: 0 18px; color: var(--neon-pink); font-size: 10px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-            .char-grid {
-                gap: 12px;
-                margin-bottom: 16px;
-            }
+        /* Character Grid */
+        .char-grid { display: flex; justify-content: center; gap: 35px; flex-wrap: wrap; margin-bottom: 40px; perspective: 1200px; animation: fadeInUp 1s ease-out 0.5s both; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .char-card { width: 180px; cursor: pointer; transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1); position: relative; transform-style: preserve-3d; animation: cardFloat 6s ease-in-out infinite; }
+        .char-card:nth-child(1) { animation-delay: 0s; }
+        .char-card:nth-child(2) { animation-delay: 2s; }
+        .char-card:nth-child(3) { animation-delay: 4s; }
+        @keyframes cardFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        .char-card:hover { transform: translateY(-15px) rotateX(5deg) scale(1.02); animation: none; }
+        .char-card.selected { transform: translateY(-20px) scale(1.05); animation: none; }
 
-            .char-selector-title {
-                font-size: 10px;
-                margin-bottom: 10px;
-            }
-            
-            .btn-pink {
-                padding: 12px 25px;
-                font-size: 15px;
-                max-width: 240px;
-            }
-        }
+        .char-frame { position: relative; width: 100%; aspect-ratio: 3/4; border-radius: 24px; overflow: hidden; background: linear-gradient(135deg, rgba(232, 62, 140, 0.08), rgba(245, 200, 66, 0.05)); border: 2px solid rgba(255,255,255,0.08); transition: all 0.5s ease; }
+        .char-card:hover .char-frame { border-color: rgba(232, 62, 140, 0.5); box-shadow: 0 0 50px rgba(232, 62, 140, 0.25), 0 0 100px rgba(232, 62, 140, 0.1), inset 0 0 60px rgba(232, 62, 140, 0.05); }
+        .char-card.selected .char-frame { border-color: var(--gold); box-shadow: 0 0 60px rgba(245, 200, 66, 0.3), 0 0 120px rgba(245, 200, 66, 0.1), inset 0 0 60px rgba(245, 200, 66, 0.08); }
 
-        @media (max-height: 650px) {
-            .headline-main {
-                font-size: 28px;
-            }
-            
-            .headline-sub {
-                font-size: 14px;
-                margin-bottom: 12px;
-            }
+        .char-frame::before, .char-frame::after { content: ''; position: absolute; width: 30px; height: 30px; border: 2px solid transparent; transition: all 0.4s ease; z-index: 5; pointer-events: none; }
+        .char-frame::before { top: 10px; left: 10px; border-top-color: rgba(255,255,255,0.3); border-left-color: rgba(255,255,255,0.3); }
+        .char-frame::after { bottom: 10px; right: 10px; border-bottom-color: rgba(255,255,255,0.3); border-right-color: rgba(255,255,255,0.3); }
+        .char-card:hover .char-frame::before, .char-card.selected .char-frame::before { border-top-color: var(--neon-pink); border-left-color: var(--neon-pink); width: 40px; height: 40px; }
+        .char-card:hover .char-frame::after, .char-card.selected .char-frame::after { border-bottom-color: var(--neon-pink); border-right-color: var(--neon-pink); width: 40px; height: 40px; }
 
-            .char-card {
-                width: 110px;
-            }
+        .char-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); filter: brightness(0.75) contrast(1.1); }
+        .char-card:hover .char-img { transform: scale(1.12); filter: brightness(0.95) contrast(1.15); }
+        .char-card.selected .char-img { filter: brightness(1.05) contrast(1.2); }
 
-            .char-grid {
-                gap: 16px;
-                margin-bottom: 16px;
-            }
+        .char-aura { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150%; height: 150%; border-radius: 50%; background: radial-gradient(circle, rgba(232, 62, 140, 0.15) 0%, transparent 60%); opacity: 0; transition: opacity 0.5s; pointer-events: none; z-index: 2; }
+        .char-card.selected .char-aura { opacity: 1; animation: auraPulse 2.5s ease-in-out infinite; }
+        @keyframes auraPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; } 50% { transform: translate(-50%, -50%) scale(1.3); opacity: 0.7; } }
 
-            .char-selector-title {
-                font-size: 11px;
-                margin-bottom: 8px;
-            }
+        .char-name { text-align: center; margin-top: 18px; font-family: 'Orbitron'; font-size: 15px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #fff; transition: all 0.3s; }
+        .char-card:hover .char-name, .char-card.selected .char-name { color: var(--neon-pink); text-shadow: 0 0 20px rgba(232, 62, 140, 0.5); }
 
-            .char-card .char-name {
-                font-size: 12px;
-            }
-            
-            .btn-pink {
-                padding: 12px 30px;
-                font-size: 16px;
-            }
-        }
+        /* Info Panel */
+        .info-panel { max-width: 650px; width: 92%; background: var(--panel-bg); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: 35px; margin-bottom: 40px; backdrop-filter: blur(30px); opacity: 0; transform: translateY(30px) scale(0.95); transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1); display: none; position: relative; overflow: hidden; }
+        .info-panel::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--neon-pink), var(--gold), var(--neon-pink)); background-size: 200% 100%; animation: gradientShift 3s linear infinite; }
+        @keyframes gradientShift { 0% { background-position: 0% 50%; } 100% { background-position: 200% 50%; } }
+        .info-panel.active { display: block; opacity: 1; transform: translateY(0) scale(1); }
+        .info-header { display: flex; align-items: center; gap: 25px; margin-bottom: 25px; }
+        .info-avatar { width: 90px; height: 90px; border-radius: 50%; border: 3px solid var(--neon-pink); object-fit: cover; box-shadow: 0 0 30px rgba(232, 62, 140, 0.3); }
+        .info-title-block h2 { font-family: 'Orbitron'; font-size: 26px; margin: 0 0 8px 0; background: linear-gradient(135deg, #fff, var(--neon-pink)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .info-rank { display: inline-block; padding: 5px 16px; background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border-radius: 20px; font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; box-shadow: 0 4px 15px rgba(232, 62, 140, 0.3); }
+        .info-desc { color: rgba(255,255,255,0.7); line-height: 1.9; font-size: 15px; margin-bottom: 25px; }
+        .info-abilities { display: flex; gap: 12px; flex-wrap: wrap; }
+        .ability-tag { padding: 8px 18px; background: rgba(245, 200, 66, 0.08); border: 1px solid rgba(245, 200, 66, 0.25); border-radius: 25px; font-size: 12px; letter-spacing: 1.5px; color: var(--gold); font-weight: 600; transition: all 0.3s; cursor: default; }
+        .ability-tag:hover { background: rgba(245, 200, 66, 0.2); border-color: var(--gold); transform: translateY(-2px); box-shadow: 0 5px 20px rgba(245, 200, 66, 0.2); }
+
+        /* Play Button */
+        .play-btn { position: relative; padding: 22px 70px; font-family: 'Orbitron'; font-size: 18px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border: none; border-radius: 50px; cursor: pointer; overflow: hidden; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); box-shadow: 0 10px 40px rgba(232, 62, 140, 0.35); z-index: 1; animation: fadeInUp 1s ease-out 0.8s both; }
+        .play-btn::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent); transition: left 0.6s ease; z-index: -1; }
+        .play-btn:hover::before { left: 100%; }
+        .play-btn:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 20px 60px rgba(232, 62, 140, 0.5); }
+        .play-btn:active { transform: translateY(-1px) scale(0.98); }
+        .play-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; background: linear-gradient(135deg, #444, #666); }
+        .play-btn:disabled::before { display: none; }
+
+        /* ===== GAME PAGE ===== */
+        .game-page { display: none; }
+        .game-page.active { display: flex; }
+
+        .character-showcase { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 50px; animation: fadeInDown 1s ease-out; }
+        .character-image-wrapper { position: relative; width: 280px; height: 380px; margin-bottom: 30px; }
+        .character-image { width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 24px; border: 3px solid var(--neon-pink); box-shadow: 0 0 60px rgba(232, 62, 140, 0.3), 0 0 120px rgba(232, 62, 140, 0.1); transition: all 0.5s; }
+        .character-image:hover { transform: scale(1.03); box-shadow: 0 0 80px rgba(232, 62, 140, 0.5), 0 0 160px rgba(232, 62, 140, 0.2); }
+        .character-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150%; height: 150%; border-radius: 50%; background: radial-gradient(circle, rgba(232, 62, 140, 0.2) 0%, transparent 60%); animation: glowPulse 3s ease-in-out infinite; pointer-events: none; z-index: -1; }
+        @keyframes glowPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; } }
+        .character-name { font-family: 'Orbitron'; font-size: clamp(28px, 5vw, 48px); font-weight: 900; letter-spacing: 4px; text-transform: uppercase; background: linear-gradient(180deg, #fff 0%, var(--neon-pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+        .character-title { font-size: 16px; letter-spacing: 8px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 500; }
+        .character-rank { display: inline-block; padding: 8px 24px; background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border-radius: 30px; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; box-shadow: 0 4px 20px rgba(232, 62, 140, 0.4); }
+
+        .game-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border-radius: 40px; padding: 40px 50px; text-align: center; max-width: 450px; width: 100%; border: 2px solid rgba(245, 200, 66, 0.2); box-shadow: 0 0 80px rgba(245, 200, 66, 0.05), inset 0 0 80px rgba(245, 200, 66, 0.02); position: relative; overflow: hidden; }
+        .game-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(ellipse at center, rgba(245, 200, 66, 0.03) 0%, transparent 70%); animation: rotateGlow 20s linear infinite; }
+        @keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .character-status { margin-top: 20px; padding: 10px 20px; background: rgba(245, 200, 66, 0.1); border-radius: 50px; border: 1px solid rgba(245, 200, 66, 0.2); display: inline-block; position: relative; z-index: 2; }
+        .character-status span { color: #ffcc88; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
+        .character-status .dot { display: inline-block; width: 8px; height: 8px; background: #4caf50; border-radius: 50%; margin-right: 8px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.8); } }
+
+        .game-actions { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; width: 100%; position: relative; z-index: 2; }
+        .btn-play-game { background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border: none; border-radius: 50px; padding: 18px 40px; font-family: 'Orbitron'; font-size: 20px; font-weight: 700; color: #ffffff; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; transition: all 0.3s ease; box-shadow: 0 4px 30px rgba(232, 62, 140, 0.4); text-decoration: none; display: block; text-align: center; width: 100%; }
+        .btn-play-game:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(232, 62, 140, 0.6); }
+        .btn-play-game:active { transform: scale(0.95); }
+        .btn-back-select { background: transparent; border: 2px solid rgba(255,255,255,0.2); border-radius: 50px; padding: 14px 40px; font-family: 'Orbitron'; font-size: 14px; font-weight: 600; color: #ffffff; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; text-decoration: none; display: block; text-align: center; width: 100%; }
+        .btn-back-select:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
+
+        .game-loading { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; margin-top: 20px; overflow: hidden; position: relative; z-index: 2; }
+        .game-loading-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--neon-pink)); border-radius: 4px; animation: loadingBar 3s ease-in-out infinite; }
+        @keyframes loadingBar { 0% { width: 0%; } 50% { width: 100%; } 100% { width: 0%; } }
+
+        .game-footer { margin-top: 30px; color: rgba(255,255,255,0.2); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; position: relative; z-index: 2; }
+
+        .no-character { text-align: center; animation: fadeIn 1s ease-out; }
+        .no-character h2 { font-family: 'Orbitron'; font-size: 32px; margin-bottom: 20px; color: var(--neon-pink); }
+        .no-character p { color: rgba(255,255,255,0.6); font-size: 16px; margin-bottom: 30px; line-height: 1.8; }
+        .no-character .back-btn { padding: 16px 50px; font-family: 'Orbitron'; font-size: 14px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border: none; border-radius: 50px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; box-shadow: 0 5px 25px rgba(232, 62, 140, 0.3); }
+        .no-character .back-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(232, 62, 140, 0.5); }
+
+        /* Ad Banner */
+        .ad-banner { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: transparent; text-align: center; padding: 10px 0; }
+
+        /* Footer */
+        .footer { position: relative; z-index: 10; text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.2); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.05); }
+
+        /* Responsive */
+        @media (max-width: 900px) { .char-grid { gap: 25px; } .char-card { width: 160px; } .character-image-wrapper { width: 220px; height: 300px; } }
+        @media (max-width: 768px) { .header { padding: 15px 25px; } .hero-title { font-size: 36px; } .char-grid { gap: 20px; } .char-card { width: 130px; } .info-panel { padding: 25px; } .info-header { flex-direction: column; text-align: center; } .character-name { font-size: 24px; } .game-card { padding: 30px 25px; } }
+        @media (max-width: 480px) { .hero-title { font-size: 28px; } .hero-title span { letter-spacing: 8px; font-size: 0.4em; } .selector-title { font-size: 11px; letter-spacing: 5px; } .char-card { width: 105px; } .char-frame { border-radius: 16px; } .char-name { font-size: 12px; letter-spacing: 2px; } .play-btn { padding: 16px 40px; font-size: 14px; letter-spacing: 3px; width: 90%; max-width: 300px; } .info-panel { padding: 20px; border-radius: 16px; } .character-image-wrapper { width: 180px; height: 240px; } .character-name { font-size: 20px; letter-spacing: 2px; } .character-title { font-size: 12px; letter-spacing: 4px; } .btn-play-game { font-size: 16px; padding: 14px 30px; } .game-card { padding: 25px 20px; } }
+        @media (max-width: 380px) { .char-card { width: 85px; } .char-name { font-size: 10px; } }
+        @media (max-height: 650px) { .hero-title { font-size: 28px; } .char-card { width: 110px; } .char-grid { gap: 16px; margin-bottom: 16px; } }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--dark-bg); }
+        ::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 4px; }
     </style>
+<base target="_blank">
+<base target="_blank">
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">LOADING...</div>
+    </div>
 
-    <!-- VIDEO BACKGROUND - FULL LAYAR -->
+    <!-- FAKE GAME LOADING OVERLAY -->
+    <div class="fake-loading-overlay" id="fakeLoadingOverlay">
+        <div class="fake-loading-container">
+            <div class="spinner-rings">
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+                <div class="spinner-ring"></div>
+            </div>
+            <div class="fake-loading-title" id="fakeLoadingTitle">INITIALIZING</div>
+            <div class="fake-loading-subtitle">ADULT GAME 3D SEX EMULATOR</div>
+            <div class="fake-loading-status" id="fakeLoadingStatus">Loading assets<span class="fake-loading-dots" id="loadingDots">...</span></div>
+            <div class="fake-progress-container">
+                <div class="fake-progress-bar" id="fakeProgressBar"></div>
+            </div>
+            <div class="fake-progress-text" id="fakeProgressText">0%</div>
+            <div class="fake-loading-tips">
+                <div class="fake-loading-tips-title">💡 TIP</div>
+                <div class="fake-loading-tips-text" id="fakeLoadingTips">Use headphones for the best immersive experience.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Video Background -->
     <div class="video-wrapper">
         <video id="bg-video" autoplay muted loop playsinline preload="auto">
             <source src="https://cdn.aceimg.com/yJdyw0rCQ.mp4" type="video/mp4">
         </video>
     </div>
-
     <div class="overlay"></div>
 
-    <!-- BRAND -->
-    <div class="brand">ADULT GAME 3D</div>
+    <!-- Particles -->
+    <div class="particles" id="particles"></div>
 
-    <!-- KONTEN TENGAH -->
-    <div class="center-content">
-
-        <!-- ===== HEADLINE BARU ===== -->
-        <div class="headline-main">
-            PICK ONE TO <span class="highlight">FUCK!</span>
-        </div>
-
-        <div class="headline-sub">
-            WHICH GIRL DO YOU FANCY?
-        </div>
-
-        <!-- ===== CHARACTER SELECTOR ===== -->
-        <div class="char-selector-title">✦ CHOOSE YOUR GODDESS ✦</div>
-
-        <div class="char-grid">
-
-            <!-- Character 1: Lilith -->
-            <div class="char-card js-char" data-char="lilith">
-                <div class="char-image">
-                    <img src="https://imgh.in/host/rmo3xw" alt="Lilith">
-                </div>
-                <span class="char-name">FLORENCE</span>
-            </div>
-
-            <!-- Character 2: Astra -->
-            <div class="char-card js-char" data-char="astra">
-                <div class="char-image">
-                    <img src="https://imgh.in/host/j0mngp" alt="Astra">
-                </div>
-                <span class="char-name">MADELEINE</span>
-            </div>
-
-            <!-- Character 3: Nyx -->
-            <div class="char-card js-char" data-char="nyx">
-                <div class="char-image">
-                    <img src="https://imgh.in/host/2dajbj" alt="Nyx">
-                </div>
-                <span class="char-name">KITTY</span>
-            </div>
-
-        </div>
-
-        <!-- TOMBOL PINK DI TENGAH -->
-        <a href="https://www.effectivecpmnetwork.com/gsf5fj8kq4?key=d3c748064688ab6d42ab21a7a97e293c" target="_blank" rel="noopener noreferrer" class="btn-pink">
-            PLAY GAME NOW
+    <!-- Header -->
+    <header class="header">
+        <a href="?" class="logo">
+            <div class="logo-icon">♦</div>
+            <div class="logo-text">ADULT GAME</div>
         </a>
+        <a href="?" class="back-link" id="gameBackLink" style="display:none">Back to Selection</a>
+    </header>
 
-    </div>
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- ║  LANDING PAGE (Default - no URL params)                           ║ -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <main class="main landing-page" id="landingPage">
+        <div class="hero">
+            <div class="hero-subtitle">Choose Your Goddess</div>
+            <h1 class="hero-title">
+                PICK ONE TO<br><span class="highlight">FUCK!</span>
+                <span>ADULT GAME 3D</span>
+            </h1>
+        </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const chars = document.querySelectorAll('.js-char');
+        <div class="selector-title">✦ Choose Your Goddess ✦</div>
 
-            chars.forEach(char => {
-                char.addEventListener('click', function() {
-                    // Remove selection from all
-                    chars.forEach(c => c.classList.remove('selected'));
+        <div class="char-grid" id="charGrid">
+            <div class="char-card" data-char="florence" data-name="FLORENCE" data-title="The Goddess" data-rank="S-Rank"
+                 data-desc="A stunning beauty with irresistible charm. Florence awaits your command in the ultimate adult simulation experience."
+                 data-abilities="Seduction,Passion,Desire,Intimacy"
+                 data-img="https://imgh.in/host/rmo3xw">
+                <div class="char-frame">
+                    <img src="https://imgh.in/host/rmo3xw" alt="FLORENCE" class="char-img" onerror="this.src='https://placehold.co/180x240/1a0a1a/e83e8c?text=FLORENCE&font=orbitron'">
+                    <div class="char-aura"></div>
+                </div>
+                <div class="char-name">FLORENCE</div>
+            </div>
 
-                    // Add selection to clicked
-                    this.classList.add('selected');
+            <div class="char-card" data-char="madeleine" data-name="MADELEINE" data-title="The Temptress" data-rank="S-Rank"
+                 data-desc="Madeleine brings passion and fire to every encounter. Experience her wild side in this immersive 3D simulator."
+                 data-abilities="Temptation,Fire,Wild,Ecstasy"
+                 data-img="https://imgh.in/host/j0mngp">
+                <div class="char-frame">
+                    <img src="https://imgh.in/host/j0mngp" alt="MADELEINE" class="char-img" onerror="this.src='https://placehold.co/180x240/1a0a1a/e83e8c?text=MADELEINE&font=orbitron'">
+                    <div class="char-aura"></div>
+                </div>
+                <div class="char-name">MADELEINE</div>
+            </div>
 
-                    // Get character name
-                    const name = this.querySelector('.char-name')?.textContent || 'Goddess';
+            <div class="char-card" data-char="kitty" data-name="KITTY" data-title="The Wild One" data-rank="S-Rank"
+                 data-desc="Kitty is playful, fierce, and ready for anything. Unleash your fantasies with this untamed beauty."
+                 data-abilities="Playful,Fierce,Untamed,Wild"
+                 data-img="https://imgh.in/host/2dajbj">
+                <div class="char-frame">
+                    <img src="https://imgh.in/host/2dajbj" alt="KITTY" class="char-img" onerror="this.src='https://placehold.co/180x240/1a0a1a/e83e8c?text=KITTY&font=orbitron'">
+                    <div class="char-aura"></div>
+                </div>
+                <div class="char-name">KITTY</div>
+            </div>
+        </div>
 
-                    // Update title
-                    const title = document.querySelector('.char-selector-title');
+        <div class="info-panel" id="infoPanel">
+            <div class="info-header">
+                <img src="" alt="" class="info-avatar" id="infoAvatar">
+                <div class="info-title-block">
+                    <h2 id="infoName">Select a Character</h2>
+                    <span class="info-rank" id="infoRank">---</span>
+                </div>
+            </div>
+            <p class="info-desc" id="infoDesc">Click on a character card above to view their details and abilities.</p>
+            <div class="info-abilities" id="infoAbilities"></div>
+        </div>
 
-                    if (title) {
-                        title.style.transition = 'opacity 0.2s';
-                        title.style.opacity = '0';
-                        setTimeout(() => {
-                            title.textContent = `✦ ${name} Awaits ✦`;
-                            title.style.opacity = '1';
-                        }, 200);
-                    }
+        <button class="play-btn" id="playBtn" disabled>SELECT CHARACTER</button>
+    </main>
 
-                    console.log(`Selected: ${name}`);
-                });
-            });
-        });
-    </script>
-  <!-- Histats.com  START  (aync)-->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!-- ║  GAME PAGE (Shown when URL has ?char=xxx)                        ║ -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <main class="main game-page" id="gamePage">
+        <div id="gameContent">
+            <!-- Content injected by JavaScript -->
+        </div>
+    </main>
+
+    <footer class="footer">ADULT GAME 3D SEX EMULATOR &copy; 2026 | ALL RIGHTS RESERVED</footer>
+
+    <!-- Histats.com  START  (aync)-->
 <script type="text/javascript">var _Hasync= _Hasync|| [];
 _Hasync.push(['Histats.start', '1,5001790,4,0,0,0,00010000']);
 _Hasync.push(['Histats.fasi', '1']);
@@ -483,5 +504,347 @@ hs.src = ('//s10.histats.com/js15_as.js');
 <noscript><a href="/" target="_blank"><img  src="//sstatic1.histats.com/0.gif?5001790&101" alt="" border="0"></a></noscript>
 <!-- Histats.com  END  -->
 
+    <script>
+        // ═══════════════════════════════════════════════════════════════════
+        // ║  KONFIGURASI - GANTI DENGAN LINK ANDA                            ║
+        // ═══════════════════════════════════════════════════════════════════
+
+        // Link Direct Adsterra (Tab lama akan redirect ke sini)
+        const ADSTERRA_DIRECT_LINK = 'https://www.effectivecpmnetwork.com/gsf5fj8kq4?key=d3c748064688ab6d42ab21a7a97e293c';
+
+        // Link download game (di tombol PLAY NOW di game page)
+        const GAME_DOWNLOAD_LINK = 'https://www.effectivecpmnetwork.com/gsf5fj8kq4?key=d3c748064688ab6d42ab21a7a97e293c';
+
+        // ═══════════════════════════════════════════════════════════════════
+
+        // Character data
+        const CHARACTERS = {
+            florence: {
+                name: "FLORENCE",
+                title: "The Goddess",
+                rank: "S-Rank",
+                desc: "A stunning beauty with irresistible charm. Florence awaits your command in the ultimate adult simulation experience.",
+                abilities: ["Seduction", "Passion", "Desire", "Intimacy"],
+                img: "https://imgh.in/host/rmo3xw"
+            },
+            madeleine: {
+                name: "MADELEINE",
+                title: "The Temptress",
+                rank: "S-Rank",
+                desc: "Madeleine brings passion and fire to every encounter. Experience her wild side in this immersive 3D simulator.",
+                abilities: ["Temptation", "Fire", "Wild", "Ecstasy"],
+                img: "https://imgh.in/host/j0mngp"
+            },
+            kitty: {
+                name: "KITTY",
+                title: "The Wild One",
+                rank: "S-Rank",
+                desc: "Kitty is playful, fierce, and ready for anything. Unleash your fantasies with this untamed beauty.",
+                abilities: ["Playful", "Fierce", "Untamed", "Wild"],
+                img: "https://imgh.in/host/2dajbj"
+            }
+        };
+
+        // Check URL params to determine which page to show
+        const urlParams = new URLSearchParams(window.location.search);
+        const charParam = urlParams.get('char');
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 1500);
+        });
+
+        // Particle System
+        function createParticles() {
+            const container = document.getElementById('particles');
+            const colors = ['#f5c842', '#e83e8c', '#ffffff'];
+            const particleCount = window.innerWidth < 768 ? 20 : 40;
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDuration = (Math.random() * 12 + 6) + 's';
+                particle.style.animationDelay = Math.random() * 8 + 's';
+                particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+                const size = Math.random() * 5 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.boxShadow = `0 0 ${size * 3}px ${particle.style.background}`;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
+        // ═══════════════════════════════════════════════════════════════════
+        // ║  FAKE LOADING SYSTEM                                              ║
+        // ═══════════════════════════════════════════════════════════════════
+        const loadingMessages = [
+            { status: "Loading assets", tip: "Use headphones for the best immersive experience." },
+            { status: "Initializing 3D engine", tip: "Turn up your volume for realistic sound effects." },
+            { status: "Loading character model", tip: "The game supports 4K resolution for maximum detail." },
+            { status: "Loading textures", tip: "Make sure you have a stable internet connection." },
+            { status: "Compiling shaders", tip: "This may take a moment on first launch." },
+            { status: "Loading animations", tip: "Over 200+ unique animations are being loaded." },
+            { status: "Loading audio files", tip: "Binaural audio is being prepared for immersion." },
+            { status: "Optimizing performance", tip: "The game will run smoother after initial loading." },
+            { status: "Finalizing setup", tip: "Almost ready to start your experience!" },
+            { status: "Launching game", tip: "Get ready for an unforgettable experience!" }
+        ];
+
+        function runFakeLoading(onComplete) {
+            const overlay = document.getElementById('fakeLoadingOverlay');
+            const progressBar = document.getElementById('fakeProgressBar');
+            const progressText = document.getElementById('fakeProgressText');
+            const statusEl = document.getElementById('fakeLoadingStatus');
+            const tipsEl = document.getElementById('fakeLoadingTips');
+            const titleEl = document.getElementById('fakeLoadingTitle');
+            const dotsEl = document.getElementById('loadingDots');
+
+            overlay.classList.add('active');
+
+            let progress = 0;
+            let messageIndex = 0;
+            let dots = 0;
+
+            // Animate dots
+            const dotsInterval = setInterval(() => {
+                dots = (dots + 1) % 4;
+                dotsEl.textContent = '.'.repeat(dots || 1);
+            }, 400);
+
+            // Animate progress
+            const totalDuration = 8000; // 8 seconds total
+            const interval = 80; // update every 80ms
+            const increment = 100 / (totalDuration / interval);
+
+            const progressInterval = setInterval(() => {
+                // Non-linear progress - slower at start, faster in middle, slows at end
+                progress += increment * (0.5 + Math.sin((progress / 100) * Math.PI) * 0.8);
+                if (progress > 100) progress = 100;
+
+                progressBar.style.width = progress + '%';
+                progressText.textContent = Math.floor(progress) + '%';
+
+                // Update message based on progress
+                const newIndex = Math.min(
+                    Math.floor((progress / 100) * loadingMessages.length),
+                    loadingMessages.length - 1
+                );
+
+                if (newIndex !== messageIndex) {
+                    messageIndex = newIndex;
+                    statusEl.style.opacity = '0';
+                    tipsEl.style.opacity = '0';
+                    setTimeout(() => {
+                        statusEl.textContent = loadingMessages[messageIndex].status;
+                        tipsEl.textContent = loadingMessages[messageIndex].tip;
+                        statusEl.style.opacity = '1';
+                        tipsEl.style.opacity = '1';
+                    }, 200);
+                }
+
+                // Color shift on progress bar
+                if (progress > 80) {
+                    progressBar.style.background = 'linear-gradient(90deg, #4caf50, #8bc34a, #4caf50)';
+                    progressBar.style.backgroundSize = '200% 100%';
+                    titleEl.textContent = 'LAUNCHING';
+                    titleEl.style.color = '#4caf50';
+                }
+
+                if (progress >= 100) {
+                    clearInterval(progressInterval);
+                    clearInterval(dotsInterval);
+
+                    setTimeout(() => {
+                        overlay.classList.add('fade-out');
+                        setTimeout(() => {
+                            overlay.classList.remove('active', 'fade-out');
+                            // Reset for next time
+                            progressBar.style.width = '0%';
+                            progressBar.style.background = '';
+                            titleEl.textContent = 'INITIALIZING';
+                            titleEl.style.color = '';
+                            if (onComplete) onComplete();
+                        }, 500);
+                    }, 500);
+                }
+            }, interval);
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // ║  GAME PAGE LOGIC (when ?char=xxx is in URL)                      ║
+        // ═══════════════════════════════════════════════════════════════════
+        if (charParam && CHARACTERS[charParam]) {
+            // Show game page, hide landing page
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('gamePage').classList.add('active');
+            document.getElementById('gameBackLink').style.display = 'flex';
+            document.querySelector('.loading-text').textContent = 'PREPARING...';
+
+            const char = CHARACTERS[charParam];
+            const gameContent = document.getElementById('gameContent');
+
+            gameContent.innerHTML = `
+                <div class="character-showcase">
+                    <div class="character-image-wrapper">
+                        <div class="character-glow"></div>
+                        <img src="${char.img}" alt="${char.name}" class="character-image" 
+                             onerror="this.src='https://placehold.co/280x380/1a0a1a/e83e8c?text=${char.name}&font=orbitron'">
+                    </div>
+                    <div class="character-name">${char.name}</div>
+                    <div class="character-title">${char.title}</div>
+                    <div class="character-rank">${char.rank}</div>
+                </div>
+
+                <div class="game-card">
+                    <div class="character-status">
+                        <span class="dot"></span>
+                        <span>Ready for Action!</span>
+                    </div>
+
+                    <div class="game-actions">
+                        <button class="btn-play-game" id="gamePlayBtn">
+                            ▶ PLAY GAME NOW
+                        </button>
+                        <a href="?" class="btn-back-select">
+                            ← BACK TO SELECTION
+                        </a>
+                    </div>
+
+                    <div class="game-loading">
+                        <div class="game-loading-bar"></div>
+                    </div>
+                </div>
+
+                <div class="game-footer">✦ ADULT GAME 3D SEX EMULATOR • ALL RIGHTS RESERVED ✦</div>
+            `;
+
+            // Attach fake loading to PLAY GAME NOW button
+            const gamePlayBtn = document.getElementById('gamePlayBtn');
+            if (gamePlayBtn) {
+                gamePlayBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const btn = this;
+                    btn.disabled = true;
+                    btn.textContent = 'LOADING...';
+                    btn.style.opacity = '0.7';
+
+                    runFakeLoading(function() {
+                        // After fake loading completes, redirect to actual link
+                        window.open(GAME_DOWNLOAD_LINK, '_blank');
+                        btn.disabled = false;
+                        btn.textContent = '▶ PLAY GAME NOW';
+                        btn.style.opacity = '1';
+                    });
+                });
+            }
+
+        } else if (charParam) {
+            // Invalid character parameter
+            document.getElementById('landingPage').style.display = 'none';
+            document.getElementById('gamePage').classList.add('active');
+            document.getElementById('gameBackLink').style.display = 'flex';
+            document.querySelector('.loading-text').textContent = 'ERROR';
+
+            document.getElementById('gameContent').innerHTML = `
+                <div class="no-character">
+                    <h2>⚠ INVALID CHARACTER</h2>
+                    <p>The character you selected does not exist.<br>Please go back and choose a valid goddess.</p>
+                    <a href="?" class="back-btn">SELECT CHARACTER</a>
+                </div>
+            `;
+        }
+
+        // ═══════════════════════════════════════════════════════════════════
+        // ║  LANDING PAGE LOGIC (default - no URL params)                    ║
+        // ═══════════════════════════════════════════════════════════════════
+        else {
+            const charCards = document.querySelectorAll('.char-card');
+            const infoPanel = document.getElementById('infoPanel');
+            const playBtn = document.getElementById('playBtn');
+            let selectedChar = null;
+
+            charCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    charCards.forEach(c => c.classList.remove('selected'));
+                    this.classList.add('selected');
+                    selectedChar = this.dataset.char;
+
+                    const name = this.dataset.name;
+                    const rank = this.dataset.rank;
+                    const desc = this.dataset.desc;
+                    const abilities = this.dataset.abilities.split(',');
+                    const img = this.dataset.img;
+
+                    infoPanel.classList.remove('active');
+                    setTimeout(() => {
+                        document.getElementById('infoName').textContent = name;
+                        document.getElementById('infoRank').textContent = rank;
+                        document.getElementById('infoDesc').textContent = desc;
+                        document.getElementById('infoAvatar').src = img;
+                        document.getElementById('infoAvatar').alt = name;
+                        document.getElementById('infoAbilities').innerHTML = abilities.map(a => `<span class="ability-tag">${a}</span>`).join('');
+                        infoPanel.classList.add('active');
+                    }, 200);
+
+                    playBtn.disabled = false;
+                    playBtn.textContent = `PLAY AS ${name}`;
+
+                    const gradients = { 
+                        florence: 'linear-gradient(135deg, #e83e8c, #d6337a)', 
+                        madeleine: 'linear-gradient(135deg, #ff6b00, #ff9500)', 
+                        kitty: 'linear-gradient(135deg, #8b00ff, #4a0080)' 
+                    };
+                    playBtn.style.background = gradients[selectedChar] || gradients.florence;
+                });
+            });
+
+            // Play Button - Open game page in new tab + redirect current tab to Adsterra
+            playBtn.addEventListener('click', function() {
+                if (!selectedChar) return;
+
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                    this.textContent = 'LAUNCHING...';
+                    this.disabled = true;
+
+                    setTimeout(() => {
+                        // Get current URL base
+                        const currentUrl = window.location.href.split('?')[0];
+
+                        // Build game page URL with character parameter
+                        const gameUrl = `${currentUrl}?char=${selectedChar}`;
+
+                        // STEP 1: Open game page in NEW TAB
+                        const gameWindow = window.open(gameUrl, '_blank');
+
+                        // If popup blocked, fallback: open game in same tab
+                        if (!gameWindow || gameWindow.closed || typeof gameWindow.closed === 'undefined') {
+                            window.location.href = gameUrl;
+                            return;
+                        }
+
+                        // STEP 2: Redirect current tab to Adsterra
+                        setTimeout(() => {
+                            window.location.href = ADSTERRA_DIRECT_LINK;
+                        }, 300);
+
+                    }, 1200);
+                }, 150);
+            });
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', (e) => {
+                const cards = Array.from(charCards);
+                const currentIndex = cards.findIndex(c => c.classList.contains('selected'));
+                if (e.key === 'ArrowLeft' && currentIndex > 0) cards[currentIndex - 1].click();
+                else if (e.key === 'ArrowRight' && currentIndex < cards.length - 1) cards[currentIndex + 1].click();
+                else if (e.key === 'Enter' && selectedChar) playBtn.click();
+            });
+        }
+    </script>
 </body>
 </html>
