@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  	<script src="https://pl29660079.effectivecpmnetwork.com/14/5a/b2/145ab227ef42be577fae824335cabf34.js"></script>
+    <meta name="5a1b46f07c9e274d2c34e6eb4b203fb712d59614" content="5a1b46f07c9e274d2c34e6eb4b203fb712d59614" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>ADULT GAME 3D SEX EMULATOR - Character Select</title>
+    <title>ADULT GAME 3D SEX EMULATOR</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
@@ -28,14 +30,6 @@
         .particles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2; pointer-events: none; overflow: hidden; }
         .particle { position: absolute; border-radius: 50%; opacity: 0; animation: floatUp linear infinite; }
         @keyframes floatUp { 0% { transform: translateY(100vh) scale(0); opacity: 0; } 10% { opacity: 0.7; } 90% { opacity: 0.7; } 100% { transform: translateY(-10vh) scale(1.2); opacity: 0; } }
-
-        /* ===== LOADING SCREEN ===== */
-        .loading-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--dark-bg); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 1s ease, visibility 1s ease; }
-        .loading-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
-        .loading-spinner { width: 80px; height: 80px; border: 4px solid rgba(232, 62, 140, 0.2); border-top-color: var(--neon-pink); border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 30px; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .loading-text { font-family: 'Orbitron'; font-size: 16px; letter-spacing: 6px; color: var(--neon-pink); animation: loadingPulse 1.5s ease-in-out infinite; }
-        @keyframes loadingPulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 
         /* ===== FAKE GAME LOADING OVERLAY ===== */
         .fake-loading-overlay {
@@ -305,48 +299,6 @@
         .play-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; background: linear-gradient(135deg, #444, #666); }
         .play-btn:disabled::before { display: none; }
 
-        /* ===== GAME PAGE ===== */
-        .game-page { display: none; }
-        .game-page.active { display: flex; }
-
-        .character-showcase { display: flex; flex-direction: column; align-items: center; text-align: center; margin-bottom: 50px; animation: fadeInDown 1s ease-out; }
-        .character-image-wrapper { position: relative; width: 280px; height: 380px; margin-bottom: 30px; }
-        .character-image { width: 100%; height: 100%; object-fit: cover; object-position: top center; border-radius: 24px; border: 3px solid var(--neon-pink); box-shadow: 0 0 60px rgba(232, 62, 140, 0.3), 0 0 120px rgba(232, 62, 140, 0.1); transition: all 0.5s; }
-        .character-image:hover { transform: scale(1.03); box-shadow: 0 0 80px rgba(232, 62, 140, 0.5), 0 0 160px rgba(232, 62, 140, 0.2); }
-        .character-glow { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 150%; height: 150%; border-radius: 50%; background: radial-gradient(circle, rgba(232, 62, 140, 0.2) 0%, transparent 60%); animation: glowPulse 3s ease-in-out infinite; pointer-events: none; z-index: -1; }
-        @keyframes glowPulse { 0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; } 50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; } }
-        .character-name { font-family: 'Orbitron'; font-size: clamp(28px, 5vw, 48px); font-weight: 900; letter-spacing: 4px; text-transform: uppercase; background: linear-gradient(180deg, #fff 0%, var(--neon-pink) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
-        .character-title { font-size: 16px; letter-spacing: 8px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 500; }
-        .character-rank { display: inline-block; padding: 8px 24px; background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border-radius: 30px; font-size: 13px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; box-shadow: 0 4px 20px rgba(232, 62, 140, 0.4); }
-
-        .game-card { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px); border-radius: 40px; padding: 40px 50px; text-align: center; max-width: 450px; width: 100%; border: 2px solid rgba(245, 200, 66, 0.2); box-shadow: 0 0 80px rgba(245, 200, 66, 0.05), inset 0 0 80px rgba(245, 200, 66, 0.02); position: relative; overflow: hidden; }
-        .game-card::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(ellipse at center, rgba(245, 200, 66, 0.03) 0%, transparent 70%); animation: rotateGlow 20s linear infinite; }
-        @keyframes rotateGlow { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        .character-status { margin-top: 20px; padding: 10px 20px; background: rgba(245, 200, 66, 0.1); border-radius: 50px; border: 1px solid rgba(245, 200, 66, 0.2); display: inline-block; position: relative; z-index: 2; }
-        .character-status span { color: #ffcc88; font-size: 13px; letter-spacing: 3px; text-transform: uppercase; }
-        .character-status .dot { display: inline-block; width: 8px; height: 8px; background: #4caf50; border-radius: 50%; margin-right: 8px; animation: pulse 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.3; transform: scale(0.8); } }
-
-        .game-actions { display: flex; flex-direction: column; gap: 15px; margin-top: 30px; width: 100%; position: relative; z-index: 2; }
-        .btn-play-game { background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border: none; border-radius: 50px; padding: 18px 40px; font-family: 'Orbitron'; font-size: 20px; font-weight: 700; color: #ffffff; cursor: pointer; text-transform: uppercase; letter-spacing: 3px; transition: all 0.3s ease; box-shadow: 0 4px 30px rgba(232, 62, 140, 0.4); text-decoration: none; display: block; text-align: center; width: 100%; }
-        .btn-play-game:hover { transform: translateY(-3px); box-shadow: 0 8px 40px rgba(232, 62, 140, 0.6); }
-        .btn-play-game:active { transform: scale(0.95); }
-        .btn-back-select { background: transparent; border: 2px solid rgba(255,255,255,0.2); border-radius: 50px; padding: 14px 40px; font-family: 'Orbitron'; font-size: 14px; font-weight: 600; color: #ffffff; cursor: pointer; text-transform: uppercase; letter-spacing: 2px; transition: all 0.3s ease; text-decoration: none; display: block; text-align: center; width: 100%; }
-        .btn-back-select:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.4); }
-
-        .game-loading { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 4px; margin-top: 20px; overflow: hidden; position: relative; z-index: 2; }
-        .game-loading-bar { height: 100%; width: 0%; background: linear-gradient(90deg, var(--gold), var(--neon-pink)); border-radius: 4px; animation: loadingBar 3s ease-in-out infinite; }
-        @keyframes loadingBar { 0% { width: 0%; } 50% { width: 100%; } 100% { width: 0%; } }
-
-        .game-footer { margin-top: 30px; color: rgba(255,255,255,0.2); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; position: relative; z-index: 2; }
-
-        .no-character { text-align: center; animation: fadeIn 1s ease-out; }
-        .no-character h2 { font-family: 'Orbitron'; font-size: 32px; margin-bottom: 20px; color: var(--neon-pink); }
-        .no-character p { color: rgba(255,255,255,0.6); font-size: 16px; margin-bottom: 30px; line-height: 1.8; }
-        .no-character .back-btn { padding: 16px 50px; font-family: 'Orbitron'; font-size: 14px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #fff; background: linear-gradient(135deg, var(--neon-pink), var(--neon-pink-dark)); border: none; border-radius: 50px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.3s; box-shadow: 0 5px 25px rgba(232, 62, 140, 0.3); }
-        .no-character .back-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 40px rgba(232, 62, 140, 0.5); }
-
         /* Ad Banner */
         .ad-banner { position: fixed; top: 0; left: 0; width: 100%; z-index: 100; background: transparent; text-align: center; padding: 10px 0; }
 
@@ -354,9 +306,9 @@
         .footer { position: relative; z-index: 10; text-align: center; padding: 40px 20px; color: rgba(255,255,255,0.2); font-size: 11px; letter-spacing: 4px; text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.05); }
 
         /* Responsive */
-        @media (max-width: 900px) { .char-grid { gap: 25px; } .char-card { width: 160px; } .character-image-wrapper { width: 220px; height: 300px; } }
-        @media (max-width: 768px) { .header { padding: 15px 25px; } .hero-title { font-size: 36px; } .char-grid { gap: 20px; } .char-card { width: 130px; } .info-panel { padding: 25px; } .info-header { flex-direction: column; text-align: center; } .character-name { font-size: 24px; } .game-card { padding: 30px 25px; } }
-        @media (max-width: 480px) { .hero-title { font-size: 28px; } .hero-title span { letter-spacing: 8px; font-size: 0.4em; } .selector-title { font-size: 11px; letter-spacing: 5px; } .char-card { width: 105px; } .char-frame { border-radius: 16px; } .char-name { font-size: 12px; letter-spacing: 2px; } .play-btn { padding: 16px 40px; font-size: 14px; letter-spacing: 3px; width: 90%; max-width: 300px; } .info-panel { padding: 20px; border-radius: 16px; } .character-image-wrapper { width: 180px; height: 240px; } .character-name { font-size: 20px; letter-spacing: 2px; } .character-title { font-size: 12px; letter-spacing: 4px; } .btn-play-game { font-size: 16px; padding: 14px 30px; } .game-card { padding: 25px 20px; } }
+        @media (max-width: 900px) { .char-grid { gap: 25px; } .char-card { width: 160px; } }
+        @media (max-width: 768px) { .header { padding: 15px 25px; } .hero-title { font-size: 36px; } .char-grid { gap: 20px; } .char-card { width: 130px; } .info-panel { padding: 25px; } .info-header { flex-direction: column; text-align: center; } }
+        @media (max-width: 480px) { .hero-title { font-size: 28px; } .hero-title span { letter-spacing: 8px; font-size: 0.4em; } .selector-title { font-size: 11px; letter-spacing: 5px; } .char-card { width: 105px; } .char-frame { border-radius: 16px; } .char-name { font-size: 12px; letter-spacing: 2px; } .play-btn { padding: 16px 40px; font-size: 14px; letter-spacing: 3px; width: 90%; max-width: 300px; } .info-panel { padding: 20px; border-radius: 16px; } }
         @media (max-width: 380px) { .char-card { width: 85px; } .char-name { font-size: 10px; } }
         @media (max-height: 650px) { .hero-title { font-size: 28px; } .char-card { width: 110px; } .char-grid { gap: 16px; margin-bottom: 16px; } }
 
@@ -365,15 +317,8 @@
         ::-webkit-scrollbar-thumb { background: var(--neon-pink); border-radius: 4px; }
     </style>
 <base target="_blank">
-<base target="_blank">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading-screen" id="loadingScreen">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">LOADING...</div>
-    </div>
-
     <!-- FAKE GAME LOADING OVERLAY -->
     <div class="fake-loading-overlay" id="fakeLoadingOverlay">
         <div class="fake-loading-container">
@@ -399,7 +344,7 @@
     <!-- Video Background -->
     <div class="video-wrapper">
         <video id="bg-video" autoplay muted loop playsinline preload="auto">
-            <source src="https://cdn.aceimg.com/yJdyw0rCQ.mp4" type="video/mp4">
+            <source src="https://cdn.aceimg.com/yNJyFW3il.mp4" type="video/mp4">
         </video>
     </div>
     <div class="overlay"></div>
@@ -413,11 +358,10 @@
             <div class="logo-icon">♦</div>
             <div class="logo-text">ADULT GAME</div>
         </a>
-        <a href="?" class="back-link" id="gameBackLink" style="display:none">Back to Selection</a>
     </header>
 
     <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- ║  LANDING PAGE (Default - no URL params)                           ║ -->
+    <!-- ║  LANDING PAGE (SINGLE PAGE ONLY)                                  ║ -->
     <!-- ═══════════════════════════════════════════════════════════════════ -->
     <main class="main landing-page" id="landingPage">
         <div class="hero">
@@ -480,15 +424,6 @@
         <button class="play-btn" id="playBtn" disabled>SELECT CHARACTER</button>
     </main>
 
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <!-- ║  GAME PAGE (Shown when URL has ?char=xxx)                        ║ -->
-    <!-- ═══════════════════════════════════════════════════════════════════ -->
-    <main class="main game-page" id="gamePage">
-        <div id="gameContent">
-            <!-- Content injected by JavaScript -->
-        </div>
-    </main>
-
     <footer class="footer">ADULT GAME 3D SEX EMULATOR &copy; 2026 | ALL RIGHTS RESERVED</footer>
 
     <!-- Histats.com  START  (aync)-->
@@ -509,11 +444,8 @@ hs.src = ('//s10.histats.com/js15_as.js');
         // ║  KONFIGURASI - GANTI DENGAN LINK ANDA                            ║
         // ═══════════════════════════════════════════════════════════════════
 
-        // Link Direct Adsterra (Tab lama akan redirect ke sini)
+        // Link Direct Adsterra (redirect di tab yang sama - TIDAK membuka tab baru)
         const ADSTERRA_DIRECT_LINK = 'https://www.effectivecpmnetwork.com/gsf5fj8kq4?key=d3c748064688ab6d42ab21a7a97e293c';
-
-        // Link download game (di tombol PLAY NOW di game page)
-        const GAME_DOWNLOAD_LINK = 'https://throneofdesire.ero-labs.tech/lp/en/index.html?version=1&sd1=%7BdynamicIMG%7D&sd2=32608&sd3=312922&traceId=pop20260723.6a623e89d91319.56898367&f=juicy';
 
         // ═══════════════════════════════════════════════════════════════════
 
@@ -544,17 +476,6 @@ hs.src = ('//s10.histats.com/js15_as.js');
                 img: "https://imgh.in/host/2dajbj"
             }
         };
-
-        // Check URL params to determine which page to show
-        const urlParams = new URLSearchParams(window.location.search);
-        const charParam = urlParams.get('char');
-
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loadingScreen').classList.add('hidden');
-            }, 1500);
-        });
 
         // Particle System
         function createParticles() {
@@ -658,193 +579,81 @@ hs.src = ('//s10.histats.com/js15_as.js');
                     clearInterval(dotsInterval);
 
                     setTimeout(() => {
-                        overlay.classList.add('fade-out');
-                        setTimeout(() => {
-                            overlay.classList.remove('active', 'fade-out');
-                            // Reset for next time
-                            progressBar.style.width = '0%';
-                            progressBar.style.background = '';
-                            titleEl.textContent = 'INITIALIZING';
-                            titleEl.style.color = '';
-                            if (onComplete) onComplete();
-                        }, 500);
+                        // Redirect ke Adsterra di tab yang sama (TANPA membuka tab baru)
+                        if (onComplete) onComplete();
                     }, 500);
                 }
             }, interval);
         }
 
         // ═══════════════════════════════════════════════════════════════════
-        // ║  GAME PAGE LOGIC (when ?char=xxx is in URL)                      ║
+        // ║  LANDING PAGE LOGIC (SINGLE PAGE - NO GAME PAGE)                 ║
         // ═══════════════════════════════════════════════════════════════════
-        if (charParam && CHARACTERS[charParam]) {
-            // Show game page, hide landing page
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('gamePage').classList.add('active');
-            document.getElementById('gameBackLink').style.display = 'flex';
-            document.querySelector('.loading-text').textContent = 'PREPARING...';
+        const charCards = document.querySelectorAll('.char-card');
+        const infoPanel = document.getElementById('infoPanel');
+        const playBtn = document.getElementById('playBtn');
+        let selectedChar = null;
 
-            const char = CHARACTERS[charParam];
-            const gameContent = document.getElementById('gameContent');
+        charCards.forEach(card => {
+            card.addEventListener('click', function() {
+                charCards.forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedChar = this.dataset.char;
 
-            gameContent.innerHTML = `
-                <div class="character-showcase">
-                    <div class="character-image-wrapper">
-                        <div class="character-glow"></div>
-                        <img src="${char.img}" alt="${char.name}" class="character-image" 
-                             onerror="this.src='https://placehold.co/280x380/1a0a1a/e83e8c?text=${char.name}&font=orbitron'">
-                    </div>
-                    <div class="character-name">${char.name}</div>
-                    <div class="character-title">${char.title}</div>
-                    <div class="character-rank">${char.rank}</div>
-                </div>
+                const name = this.dataset.name;
+                const rank = this.dataset.rank;
+                const desc = this.dataset.desc;
+                const abilities = this.dataset.abilities.split(',');
+                const img = this.dataset.img;
 
-                <div class="game-card">
-                    <div class="character-status">
-                        <span class="dot"></span>
-                        <span>Ready for Action!</span>
-                    </div>
-
-                    <div class="game-actions">
-                        <button class="btn-play-game" id="gamePlayBtn">
-                            ▶ PLAY GAME NOW
-                        </button>
-                        <a href="?" class="btn-back-select">
-                            ← BACK TO SELECTION
-                        </a>
-                    </div>
-
-                    <div class="game-loading">
-                        <div class="game-loading-bar"></div>
-                    </div>
-                </div>
-
-                <div class="game-footer">✦ ADULT GAME 3D SEX EMULATOR • ALL RIGHTS RESERVED ✦</div>
-            `;
-
-            // Attach fake loading to PLAY GAME NOW button
-            const gamePlayBtn = document.getElementById('gamePlayBtn');
-            if (gamePlayBtn) {
-                gamePlayBtn.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const btn = this;
-                    btn.disabled = true;
-                    btn.textContent = 'LOADING...';
-                    btn.style.opacity = '0.7';
-
-                    runFakeLoading(function() {
-                        // After fake loading completes, redirect to actual link
-                        window.open(GAME_DOWNLOAD_LINK, '_blank');
-                        btn.disabled = false;
-                        btn.textContent = '▶ PLAY GAME NOW';
-                        btn.style.opacity = '1';
-                    });
-                });
-            }
-
-        } else if (charParam) {
-            // Invalid character parameter
-            document.getElementById('landingPage').style.display = 'none';
-            document.getElementById('gamePage').classList.add('active');
-            document.getElementById('gameBackLink').style.display = 'flex';
-            document.querySelector('.loading-text').textContent = 'ERROR';
-
-            document.getElementById('gameContent').innerHTML = `
-                <div class="no-character">
-                    <h2>⚠ INVALID CHARACTER</h2>
-                    <p>The character you selected does not exist.<br>Please go back and choose a valid goddess.</p>
-                    <a href="?" class="back-btn">SELECT CHARACTER</a>
-                </div>
-            `;
-        }
-
-        // ═══════════════════════════════════════════════════════════════════
-        // ║  LANDING PAGE LOGIC (default - no URL params)                    ║
-        // ═══════════════════════════════════════════════════════════════════
-        else {
-            const charCards = document.querySelectorAll('.char-card');
-            const infoPanel = document.getElementById('infoPanel');
-            const playBtn = document.getElementById('playBtn');
-            let selectedChar = null;
-
-            charCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    charCards.forEach(c => c.classList.remove('selected'));
-                    this.classList.add('selected');
-                    selectedChar = this.dataset.char;
-
-                    const name = this.dataset.name;
-                    const rank = this.dataset.rank;
-                    const desc = this.dataset.desc;
-                    const abilities = this.dataset.abilities.split(',');
-                    const img = this.dataset.img;
-
-                    infoPanel.classList.remove('active');
-                    setTimeout(() => {
-                        document.getElementById('infoName').textContent = name;
-                        document.getElementById('infoRank').textContent = rank;
-                        document.getElementById('infoDesc').textContent = desc;
-                        document.getElementById('infoAvatar').src = img;
-                        document.getElementById('infoAvatar').alt = name;
-                        document.getElementById('infoAbilities').innerHTML = abilities.map(a => `<span class="ability-tag">${a}</span>`).join('');
-                        infoPanel.classList.add('active');
-                    }, 200);
-
-                    playBtn.disabled = false;
-                    playBtn.textContent = `PLAY AS ${name}`;
-
-                    const gradients = { 
-                        florence: 'linear-gradient(135deg, #e83e8c, #d6337a)', 
-                        madeleine: 'linear-gradient(135deg, #ff6b00, #ff9500)', 
-                        kitty: 'linear-gradient(135deg, #8b00ff, #4a0080)' 
-                    };
-                    playBtn.style.background = gradients[selectedChar] || gradients.florence;
-                });
-            });
-
-            // Play Button - Open game page in new tab + redirect current tab to Adsterra
-            playBtn.addEventListener('click', function() {
-                if (!selectedChar) return;
-
-                this.style.transform = 'scale(0.95)';
+                infoPanel.classList.remove('active');
                 setTimeout(() => {
-                    this.style.transform = '';
-                    this.textContent = 'LAUNCHING...';
-                    this.disabled = true;
+                    document.getElementById('infoName').textContent = name;
+                    document.getElementById('infoRank').textContent = rank;
+                    document.getElementById('infoDesc').textContent = desc;
+                    document.getElementById('infoAvatar').src = img;
+                    document.getElementById('infoAvatar').alt = name;
+                    document.getElementById('infoAbilities').innerHTML = abilities.map(a => `<span class="ability-tag">${a}</span>`).join('');
+                    infoPanel.classList.add('active');
+                }, 200);
 
-                    setTimeout(() => {
-                        // Get current URL base
-                        const currentUrl = window.location.href.split('?')[0];
+                playBtn.disabled = false;
+                playBtn.textContent = `PLAY AS ${name}`;
 
-                        // Build game page URL with character parameter
-                        const gameUrl = `${currentUrl}?char=${selectedChar}`;
-
-                        // STEP 1: Open game page in NEW TAB
-                        const gameWindow = window.open(gameUrl, '_blank');
-
-                        // If popup blocked, fallback: open game in same tab
-                        if (!gameWindow || gameWindow.closed || typeof gameWindow.closed === 'undefined') {
-                            window.location.href = gameUrl;
-                            return;
-                        }
-
-                        // STEP 2: Redirect current tab to Adsterra
-                        setTimeout(() => {
-                            window.location.href = ADSTERRA_DIRECT_LINK;
-                        }, 300);
-
-                    }, 1200);
-                }, 150);
+                const gradients = { 
+                    florence: 'linear-gradient(135deg, #e83e8c, #d6337a)', 
+                    madeleine: 'linear-gradient(135deg, #ff6b00, #ff9500)', 
+                    kitty: 'linear-gradient(135deg, #8b00ff, #4a0080)' 
+                };
+                playBtn.style.background = gradients[selectedChar] || gradients.florence;
             });
+        });
 
-            // Keyboard Navigation
-            document.addEventListener('keydown', (e) => {
-                const cards = Array.from(charCards);
-                const currentIndex = cards.findIndex(c => c.classList.contains('selected'));
-                if (e.key === 'ArrowLeft' && currentIndex > 0) cards[currentIndex - 1].click();
-                else if (e.key === 'ArrowRight' && currentIndex < cards.length - 1) cards[currentIndex + 1].click();
-                else if (e.key === 'Enter' && selectedChar) playBtn.click();
+        // Play Button - Fake Loading then redirect to Adsterra in SAME TAB
+        playBtn.addEventListener('click', function() {
+            if (!selectedChar) return;
+
+            const btn = this;
+            btn.disabled = true;
+            btn.textContent = 'LOADING...';
+            btn.style.opacity = '0.7';
+
+            // Jalankan fake loading, lalu redirect ke Adsterra di tab yang sama
+            runFakeLoading(function() {
+                // Redirect ke Adsterra di tab yang sama (window.location.href)
+                // Halaman game akan hilang dan digantikan oleh halaman Adsterra
+                window.location.href = ADSTERRA_DIRECT_LINK;
             });
-        }
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            const cards = Array.from(charCards);
+            const currentIndex = cards.findIndex(c => c.classList.contains('selected'));
+            if (e.key === 'ArrowLeft' && currentIndex > 0) cards[currentIndex - 1].click();
+            else if (e.key === 'ArrowRight' && currentIndex < cards.length - 1) cards[currentIndex + 1].click();
+            else if (e.key === 'Enter' && selectedChar) playBtn.click();
+        });
     </script>
 </body>
 </html>
